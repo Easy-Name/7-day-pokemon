@@ -89,15 +89,21 @@ namespace ProjectPokemon
                 Console.WriteLine($"BASE EXPERIENCE: {deserialized.base_experience}");
                 Console.WriteLine($"WEIGHT: {deserialized.weight}");
                 Console.WriteLine($"HEIGHT: {deserialized.height}");
-                Console.WriteLine($"ABILITIES: ");
-                /*foreach (var ability in deserialized.Abilities)
-                {
-                    Console.WriteLine($"{deserialized.Abilities}");
-                }*/
+                Console.Write($"ABILITIES: ");
+             
                 foreach (var ability in deserialized.Abilities)
                 {
-                    Console.WriteLine($"{ability.Ability.Name}");
+                    Console.Write($"{ability.ability.name}, ");
                 }
+
+                Console.Write($"\nHELD ITEMS : ");
+
+                foreach (var items in deserialized.Held_Items)
+                {
+                    Console.Write($"{items.item.name}, ");
+                }
+
+                Console.WriteLine();
             }
             else
             {

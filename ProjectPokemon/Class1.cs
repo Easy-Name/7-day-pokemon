@@ -10,23 +10,33 @@ namespace ProjectPokemon
     {
 
         public List<AbilityInfo> Abilities;
+        public List<HeldItemsInfo> Held_Items;
 
         public float base_experience;
-        //public Dictionary <string,int> stats;
         public float height;
-        //public string[] held_items;
         public float weight;
+
+        //public Dictionary <string,int> stats;
 
     }
 
     public class Ability
     {
-        public string Name { get; set; }
+        public string name { get; set; }
     }
 
     public class AbilityInfo 
     {
-        public Ability Ability {  get; set; }
+        public Ability ability {  get; set; }
+    } 
+
+    public class HeldItems
+    {
+        public string name {  get; set; }
+    }
+    public class HeldItemsInfo
+    {
+        public HeldItems item { get; set; }
     }
 
 }
