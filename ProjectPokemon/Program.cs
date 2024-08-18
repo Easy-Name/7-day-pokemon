@@ -26,13 +26,13 @@ namespace ProjectPokemon
         {
             //string[] PokemonList = { "1 - Alakazam", "2 - Machamp", "3 - Onix", "4 - Gyarados", "5 - Lapras", "6 - Snorlax" };
             
-            Dictionary<int, string> pokemonlist = new Dictionary<int, string>();
-            pokemonlist.Add(65, "Alakazam");
-            pokemonlist.Add(68, "Machamp");
-            pokemonlist.Add(95, "Onix");
-            pokemonlist.Add(130, "Gyarados");
-            pokemonlist.Add(131, "Lapras");
-            pokemonlist.Add(143, "Snorlax");
+            Dictionary<string, string> pokemonlist = new Dictionary<string, string>();
+            pokemonlist.Add("65", "Alakazam");
+            pokemonlist.Add("68", "Machamp");
+            pokemonlist.Add("95", "Onix");
+            pokemonlist.Add("130", "Gyarados");
+            pokemonlist.Add("131", "Lapras");
+            pokemonlist.Add("143", "Snorlax");
 
             Console.WriteLine($"Hello, type the number of the pokemon specie from the list below to check its skills");
 
@@ -44,18 +44,28 @@ namespace ProjectPokemon
                 {
                     Console.WriteLine($"Type the number of the pokemon specie from the list below to check its skills");
                 }
-                foreach (KeyValuePair<int, string> kvpokemon in pokemonlist)
+                foreach (KeyValuePair<string, string> kvpokemon in pokemonlist)
                 {
                     Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
                 }
 
                 string choice = Console.ReadLine();
 
-                await checkpokemon(choice);
+                if (pokemonlist.ContainsKey(choice))
+                {
+                    await checkpokemon(choice);
 
-                Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
+                    Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
+                    
+
+                    decision = Console.ReadLine();
+                }
+                else
+                {
+                    Console.WriteLine($"{choice} is not available in the options you can choose from.");
+                    decision = "0";
+                }
                 
-                decision = Console.ReadLine();//here you can treat in case user types any option that is not available
             }
         }
 
