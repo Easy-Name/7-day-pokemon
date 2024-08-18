@@ -6,7 +6,9 @@ using System.Threading;
 using System.Threading.Tasks;
 using RestSharp;
 using RestSharp.Authenticators;
-//using RestSharp.Authenticators;
+using System.Text.Json;
+using Newtonsoft.Json;
+
 namespace ProjectPokemon
 {
     internal class Program
@@ -53,7 +55,7 @@ namespace ProjectPokemon
 
                 if (pokemonlist.ContainsKey(choice))
                 {
-                    await checkpokemon(choice);
+                    await CheckPokemon(choice);
 
                     Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
                     
@@ -69,7 +71,7 @@ namespace ProjectPokemon
             }
         }
 
-        static async Task checkpokemon(string choice)
+        static async Task CheckPokemon(string choice)
         {
             var client = new RestClient("https://pokeapi.co/api/v2/pokemon/");
             //var client = new RestClient("https://jsonplaceholder.typicode.com/");
@@ -80,7 +82,22 @@ namespace ProjectPokemon
 
             if (response.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                Console.WriteLine($"{response.Content}");
+                PokemonStats deserialized = JsonConvert.DeserializeObject< PokemonStats >(response.Content);
+
+
+                //Console.WriteLine($"{response.Content}");
+                Console.WriteLine($"BASE EXPERIENCE: {deserialized.base_experience}");
+                Console.WriteLine($"WEIGHT: {deserialized.weight}");
+                Console.WriteLine($"HEIGHT: {deserialized.height}");
+                Console.WriteLine($"ABILITIES: ");
+                /*foreach (var ability in deserialized.Abilities)
+                {
+                    Console.WriteLine($"{deserialized.Abilities}");
+                }*/
+                foreach (var ability in deserialized.Abilities)
+                {
+                    Console.WriteLine($"{ability.Ability.Name}");
+                }
             }
             else
             {
