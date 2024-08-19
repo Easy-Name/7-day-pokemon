@@ -8,13 +8,12 @@ namespace ProjectPokemon
 {
     public class PokemonStats
     {
+        public List<AbilityInfo> Abilities { get; set; }
+        public List<HeldItemsInfo> Held_Items { get; set; }
 
-        public List<AbilityInfo> Abilities;
-        public List<HeldItemsInfo> Held_Items;
-
-        public float base_experience;
-        public float height;
-        public float weight;
+        public float BaseExperience { get; set; }
+        public float Height { get; set; }
+        public float Weight { get; set; }
 
         //public Dictionary <string,int> stats;
 
@@ -22,21 +21,21 @@ namespace ProjectPokemon
 
     public class Ability
     {
-        public string name { get; set; }
+        public string Name { get; set; }
     }
 
     public class AbilityInfo 
     {
-        public Ability ability {  get; set; }
+        public Ability Ability {  get; set; }
     } 
 
     public class HeldItems
     {
-        public string name {  get; set; }
+        public string Name {  get; set; }
     }
     public class HeldItemsInfo
     {
-        public HeldItems item { get; set; }
+        public HeldItems Item { get; set; }
     }
 
 }

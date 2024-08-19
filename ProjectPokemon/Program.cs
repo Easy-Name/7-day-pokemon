@@ -15,8 +15,39 @@ namespace ProjectPokemon
     {
         static async Task Main(string[] args)
         {
+            
+            Menu.welcome(out string name, out string choice);
+            //Console.WriteLine(name);
 
-            await ChoosePokemon();
+            bool FirstLoop = true;
+
+            do
+            {
+                if (!FirstLoop)
+                {
+                    Menu.ChooseValidOption(out choice);
+                }
+
+                switch (choice)
+                {   
+                    case "1":
+                        //FirstLoop = false;
+                        await ChoosePokemon(name);
+                        break;
+                    case "2":
+                        //FirstLoop = false;
+                        //i have to develop the "view my currentpokemon" part
+                        break;
+                    case "3":
+                        //FirstLoop = false;
+                        Menu.bye();
+                        break;
+                }
+                FirstLoop = false;
+
+            } while (choice != "1" && choice != "2" && choice != "3"); 
+
+            //await ChoosePokemon();
             //Console.WriteLine("decision");
 
             // checkpokemon();
@@ -24,7 +55,7 @@ namespace ProjectPokemon
             Console.ReadLine();
         }
 
-        static async Task ChoosePokemon()
+        static async Task ChoosePokemon(string name)
         {
             //string[] PokemonList = { "1 - Alakazam", "2 - Machamp", "3 - Onix", "4 - Gyarados", "5 - Lapras", "6 - Snorlax" };
             
@@ -36,7 +67,12 @@ namespace ProjectPokemon
             pokemonlist.Add("131", "Lapras");
             pokemonlist.Add("143", "Snorlax");
 
-            Console.WriteLine($"Hello, type the number of the pokemon specie from the list below to check its skills");
+            /*string delimiter = "CYP";
+            Menu.delimiter(delimiter);*/
+
+
+            Menu.ChooseYourPokemon(name);
+            //Console.WriteLine($"{name}, type the number of the pokemon specie that you want to check");
 
             string decision = null;
 
@@ -86,24 +122,25 @@ namespace ProjectPokemon
 
 
                 //Console.WriteLine($"{response.Content}");
-                Console.WriteLine($"BASE EXPERIENCE: {deserialized.base_experience}");
-                Console.WriteLine($"WEIGHT: {deserialized.weight}");
-                Console.WriteLine($"HEIGHT: {deserialized.height}");
+                Console.WriteLine($"BASE EXPERIENCE: {deserialized.BaseExperience}");
                 Console.Write($"ABILITIES: ");
              
                 foreach (var ability in deserialized.Abilities)
                 {
-                    Console.Write($"{ability.ability.name}, ");
+                    Console.Write($"{ability.Ability.Name}, ");
                 }
 
-                Console.Write($"\nHELD ITEMS : ");
+                Console.Write($"\nHELD ITEMS: ");
 
                 foreach (var items in deserialized.Held_Items)
                 {
-                    Console.Write($"{items.item.name}, ");
+                    Console.Write($"{items.Item.Name}, ");
                 }
 
                 Console.WriteLine();
+                Console.WriteLine($"HEIGHT: {deserialized.Height}");
+                Console.WriteLine($"WEIGHT: {deserialized.Weight}");
+                
             }
             else
             {
