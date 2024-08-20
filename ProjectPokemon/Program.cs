@@ -31,15 +31,12 @@ namespace ProjectPokemon
                 switch (choice)
                 {   
                     case "1":
-                        //FirstLoop = false;
-                        await ChoosePokemon(name);
+                        await Menu.ChoosePokemon(name);
                         break;
                     case "2":
-                        //FirstLoop = false;
                         //i have to develop the "view my currentpokemon" part
                         break;
                     case "3":
-                        //FirstLoop = false;
                         Menu.bye();
                         break;
                 }
@@ -55,7 +52,7 @@ namespace ProjectPokemon
             Console.ReadLine();
         }
 
-        static async Task ChoosePokemon(string name)
+        /*static async Task ChoosePokemon(string name)
         {
             //string[] PokemonList = { "1 - Alakazam", "2 - Machamp", "3 - Onix", "4 - Gyarados", "5 - Lapras", "6 - Snorlax" };
             
@@ -68,7 +65,7 @@ namespace ProjectPokemon
             pokemonlist.Add("143", "Snorlax");
 
             /*string delimiter = "CYP";
-            Menu.delimiter(delimiter);*/
+            Menu.delimiter(delimiter);
 
 
             Menu.ChooseYourPokemon(name);
@@ -105,9 +102,9 @@ namespace ProjectPokemon
                 }
                 
             }
-        }
+        }*/
 
-        static async Task CheckPokemon(string choice)
+        public static async Task CheckPokemon(string choice)
         {
             var client = new RestClient("https://pokeapi.co/api/v2/pokemon/");
             //var client = new RestClient("https://jsonplaceholder.typicode.com/");
