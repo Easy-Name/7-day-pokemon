@@ -75,9 +75,30 @@ namespace ProjectPokemon
 
 
 
+        public static void ListPokemon(string name, Dictionary<string, string> PokemonList, out string decision)
+        {
+            Menu.ChooseYourPokemon(name);
+            //Console.WriteLine($"{name}, type the number of the pokemon specie that you want to check");
+
+            decision = null;
+            //string delimiter = "EMPTY";
+
+            if (!String.IsNullOrEmpty(decision))
+            {
+                Console.WriteLine($"Type the number of the pokemon specie from the list below to check its skills");
+            }
+            foreach (KeyValuePair<string, string> kvpokemon in PokemonList)
+            {
+                Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
+            }
+        }
+
+
+
+
+
         public static async Task ChoosePokemon(string name)
         {
-            //string[] PokemonList = { "1 - Alakazam", "2 - Machamp", "3 - Onix", "4 - Gyarados", "5 - Lapras", "6 - Snorlax" };
 
             Dictionary<string, string> pokemonlist = new Dictionary<string, string>();
             pokemonlist.Add("65", "Alakazam");
@@ -87,44 +108,95 @@ namespace ProjectPokemon
             pokemonlist.Add("131", "Lapras");
             pokemonlist.Add("143", "Snorlax");
 
-            /*string delimiter = "CYP";
-            Menu.delimiter(delimiter);*/
+            string delimiter = "EMPTY";
+            bool adopted;
 
-
-            Menu.ChooseYourPokemon(name);
+            //Menu.ChooseYourPokemon(name);
             //Console.WriteLine($"{name}, type the number of the pokemon specie that you want to check");
 
             string decision = null;
+            //string delimiter = "EMPTY";
 
             while (decision != "1")
             {
-                if (!String.IsNullOrEmpty(decision))
+                /*if (!String.IsNullOrEmpty(decision))
                 {
                     Console.WriteLine($"Type the number of the pokemon specie from the list below to check its skills");
                 }
                 foreach (KeyValuePair<string, string> kvpokemon in pokemonlist)
                 {
                     Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
-                }
+                }*/
 
-                string choice = Console.ReadLine();
+                /*Menu.ListPokemon(name, pokemonlist, out decision);
 
-                if (pokemonlist.ContainsKey(choice))
+                string choice = Console.ReadLine();*/
+
+                bool LoopExit = false;
+                do
                 {
-                    await Program.CheckPokemon(choice);
+                    Menu.ListPokemon(name, pokemonlist, out decision);
+                    string choice = Console.ReadLine();
 
-                    Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
+
+                    if (pokemonlist.ContainsKey(choice))
+                    {
+
+                        Menu.delimiter(delimiter);
+                        Console.WriteLine($"{name}, what do you want to do with {pokemonlist[choice]}");
+                        Console.WriteLine($"1 - Check Info\n2 - Adopt\n3 - Return to species menu");
+                        string ChoiceTaken = Console.ReadLine();
+
+                        switch (ChoiceTaken)
+                        {
+                            case "1":
+
+                                string delimitation = "EMPTY";
+                                Menu.delimiter(delimitation);
+                                await Program.CheckPokemon(choice);
+
+                                Menu.delimiter(delimitation);
+                                Console.WriteLine($"Adopt {pokemonlist[choice]}?\n1 - Adopt\n2 - Return to species menu");
+                                //string o = Console.ReadLine();
+                                if(Console.ReadLine() == "1")
+                                {
+                                    adopted = true;
+                                    LoopExit = true;
+                                    decision = "1";
+                                }
+                                /*else
+                                {
+
+                                }*/
+                                
+                                break;
+                            case "2":
+                                LoopExit = true;
+                                decision = "1";
+                                //i have to develop the HELD POKEMON PART
+                                adopted = true;
+                                break;
+                            case "3":
+                                decision = null;
+                                Menu.ListPokemon(name, pokemonlist, out decision);
+                                break;
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine($"{choice} is not available in the options you can choose from.");
+                        decision = "0";
+                    }
+
+                } while (LoopExit != true);
 
 
-                    decision = Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine($"{choice} is not available in the options you can choose from.");
-                    decision = "0";
-                }
+                //Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
 
-            }
+                //decision = Console.ReadLine();        
+
+            }  
 
         }
 

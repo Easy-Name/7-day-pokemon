@@ -44,66 +44,11 @@ namespace ProjectPokemon
 
             } while (choice != "1" && choice != "2" && choice != "3"); 
 
-            //await ChoosePokemon();
-            //Console.WriteLine("decision");
-
-            // checkpokemon();
             
             Console.ReadLine();
         }
 
-        /*static async Task ChoosePokemon(string name)
-        {
-            //string[] PokemonList = { "1 - Alakazam", "2 - Machamp", "3 - Onix", "4 - Gyarados", "5 - Lapras", "6 - Snorlax" };
-            
-            Dictionary<string, string> pokemonlist = new Dictionary<string, string>();
-            pokemonlist.Add("65", "Alakazam");
-            pokemonlist.Add("68", "Machamp");
-            pokemonlist.Add("95", "Onix");
-            pokemonlist.Add("130", "Gyarados");
-            pokemonlist.Add("131", "Lapras");
-            pokemonlist.Add("143", "Snorlax");
-
-            /*string delimiter = "CYP";
-            Menu.delimiter(delimiter);
-
-
-            Menu.ChooseYourPokemon(name);
-            //Console.WriteLine($"{name}, type the number of the pokemon specie that you want to check");
-
-            string decision = null;
-
-            while (decision != "1")
-            {
-                if (!String.IsNullOrEmpty(decision))
-                {
-                    Console.WriteLine($"Type the number of the pokemon specie from the list below to check its skills");
-                }
-                foreach (KeyValuePair<string, string> kvpokemon in pokemonlist)
-                {
-                    Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
-                }
-
-                string choice = Console.ReadLine();
-
-                if (pokemonlist.ContainsKey(choice))
-                {
-                    await CheckPokemon(choice);
-
-                    Console.WriteLine($"Type 1 if you want to select this pokemon or 0 if you want to go back to your options");
-                    
-
-                    decision = Console.ReadLine();
-                }
-                else
-                {
-                    Console.WriteLine($"{choice} is not available in the options you can choose from.");
-                    decision = "0";
-                }
-                
-            }
-        }*/
-
+        
         public static async Task CheckPokemon(string choice)
         {
             var client = new RestClient("https://pokeapi.co/api/v2/pokemon/");
