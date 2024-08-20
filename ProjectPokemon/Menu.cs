@@ -195,6 +195,7 @@ namespace ProjectPokemon
                         Menu.delimiter(delimiter);
                         Console.WriteLine($"{name}, what do you want to do with {pokemonlist[choice]}");
                         Console.WriteLine($"1 - Check Info\n2 - Adopt\n3 - Return to species menu");
+                        //Develop option to exit to main menu
                         string ChoiceTaken = Console.ReadLine();
 
                         switch (ChoiceTaken)
@@ -228,7 +229,6 @@ namespace ProjectPokemon
                             case "2":
                                 /*LoopExit = true;
                                 StopChoosing = "1";*/
-                                //i have to develop the HELD POKEMON PART
                                 AdoptedPokemon.Add(pokemonlist[choice]);
                                 Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                 break;
