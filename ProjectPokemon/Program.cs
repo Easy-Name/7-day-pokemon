@@ -20,29 +20,32 @@ namespace ProjectPokemon
             //Console.WriteLine(name);
 
             bool FirstLoop = true;
+            List<string> adoptedPokemon = new List<string>();
 
             do
             {
                 if (!FirstLoop)
                 {
-                    Menu.ChooseValidOption(out choice);
+                    Menu.ChooseValidOption(name ,choice, out choice);
                 }
 
                 switch (choice)
                 {   
                     case "1":
-                        await Menu.ChoosePokemon(name);
+                        List<string> ChosenPokemon = await Menu.ChoosePokemon(name);
+                        adoptedPokemon.AddRange(ChosenPokemon);
                         break;
+
                     case "2":
-                        //i have to develop the "view my currentpokemon" part
+                        Menu.AllTimeAdoptedPokemon(adoptedPokemon);
                         break;
                     case "3":
                         Menu.bye();
                         break;
                 }
                 FirstLoop = false;
-
-            } while (choice != "1" && choice != "2" && choice != "3"); 
+                
+            } while (choice != "3"); 
 
             
             Console.ReadLine();
