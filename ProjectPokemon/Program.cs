@@ -15,7 +15,15 @@ namespace ProjectPokemon
     {
         static async Task Main(string[] args)
         {
-            
+
+            await Play();
+
+            Console.ReadLine();
+        }
+
+
+        static async Task Play()
+        {
             Menu.welcome(out string name, out string choice);
             //Console.WriteLine(name);
 
@@ -26,11 +34,11 @@ namespace ProjectPokemon
             {
                 if (!FirstLoop)
                 {
-                    Menu.ChooseValidOption(name ,choice, out choice);
+                    Menu.ChooseValidOption(name, choice, out choice);
                 }
 
                 switch (choice)
-                {   
+                {
                     case "1":
                         List<string> ChosenPokemon = await Menu.ChoosePokemon(name);
                         adoptedPokemon.AddRange(ChosenPokemon);
@@ -44,13 +52,9 @@ namespace ProjectPokemon
                         break;
                 }
                 FirstLoop = false;
-                
-            } while (choice != "3"); 
 
-            
-            Console.ReadLine();
+            } while (choice != "3");
         }
-
         
         public static async Task CheckPokemon(string choice)
         {
@@ -91,9 +95,6 @@ namespace ProjectPokemon
             {
                 Console.WriteLine($"{response.ErrorMessage}");
             }
-
-            //Console.WriteLine($"{response.StatusCode}");
-            //Console.WriteLine($"{System.Net.HttpStatusCode.OK}");
 
         }
 

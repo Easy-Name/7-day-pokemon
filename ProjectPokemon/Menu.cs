@@ -105,11 +105,11 @@ namespace ProjectPokemon
 
             if (ListOfPokemon.Count == 0) 
             { 
-                Console.WriteLine($"You haven't adopted any Pokemon!"); 
+                Console.WriteLine($"You haven't adopted any Pokemon yet!"); 
             }
             else
             {
-                Console.WriteLine($"The pokemons you have adopted are");
+                Console.WriteLine($"The pokemons you have adopted are:");
 
                 foreach (string pokemon in ListOfPokemon)
                 {
