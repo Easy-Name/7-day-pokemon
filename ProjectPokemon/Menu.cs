@@ -148,7 +148,7 @@ namespace ProjectPokemon
 
 
 
-        public static async Task<List<string>> ChoosePokemon(string name, List<string> CurrentPokemonAdopt)
+        public static async Task<List<string>> ChoosePokemon(string name, int CurrentPokeQuantity)
         {
 
             Dictionary<string, string> pokemonlist = new Dictionary<string, string>();
@@ -171,18 +171,6 @@ namespace ProjectPokemon
 
             while (StopChoosing != "1")
             {
-                /*if (!String.IsNullOrEmpty(decision))
-                {
-                    Console.WriteLine($"Type the number of the pokemon specie from the list below to check its skills");
-                }
-                foreach (KeyValuePair<string, string> kvpokemon in pokemonlist)
-                {
-                    Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
-                }*/
-
-                /*Menu.ListPokemon(name, pokemonlist, out decision);
-
-                string choice = Console.ReadLine();*/
 
                 bool LoopExit = false;
                 do
@@ -213,7 +201,7 @@ namespace ProjectPokemon
                                 //string o = Console.ReadLine();
                                 if(Console.ReadLine() == "1")
                                 {
-                                    AdoptedPokemon.Add($"{CurrentPokemonAdopt.Count() + 1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
+                                    AdoptedPokemon.Add($"{CurrentPokeQuantity + AdoptedPokemon.Count+1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
 
                                     Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                     /*Menu.delimiter(delimitation);
@@ -231,7 +219,7 @@ namespace ProjectPokemon
                             case "2":
                                 /*LoopExit = true;
                                 StopChoosing = "1";*/
-                                AdoptedPokemon.Add($"{CurrentPokemonAdopt.Count() + 1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
+                                AdoptedPokemon.Add($"{CurrentPokeQuantity + AdoptedPokemon.Count+1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
                                 Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                 break;
                             case "3":

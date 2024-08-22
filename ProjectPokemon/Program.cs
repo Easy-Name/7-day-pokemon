@@ -37,7 +37,7 @@ namespace ProjectPokemon
         {
             Menu.welcome(out string name, out string choice);
             //Console.WriteLine(name);
-
+            int CurrentPokeQuantity = 0;
             bool FirstLoop = true;
             List<string> adoptedPokemon = new List<string>();
             List<PokemonMetrics> InitializedPokemon = new List<PokemonMetrics>(); // this list is not being generated
@@ -54,20 +54,10 @@ namespace ProjectPokemon
                 switch (choice)
                 {
                     case "1":
-                        List<string> ChosenPokemon = await Menu.ChoosePokemon(name, adoptedPokemon);
+                        List<string> ChosenPokemon = await Menu.ChoosePokemon(name, CurrentPokeQuantity);
                         adoptedPokemon.AddRange(ChosenPokemon);
-                        /*PokemonQuantity = adoptedPokemon.Count;
-                        difference = PokemonQuantity - ChosenPokemon.Count;*/
+                        CurrentPokeQuantity = adoptedPokemon.Count;
 
-                        //initialize adopted pokemons properties
-                        /*if (adoptedPokemon.Count > 0)
-                        {
-                            for (int i = PokemonQuantity - difference-1; i < PokemonQuantity; i++)
-                            {
-                                InitializedPokemon[i] = new PokemonMetrics();
-                            }
-
-                        }*/
 
                         foreach (string poke in adoptedPokemon)
                         {
