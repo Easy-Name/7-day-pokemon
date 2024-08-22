@@ -70,7 +70,7 @@ namespace ProjectPokemon
 
         public static void WelcomeCompliment(string name)
         {
-            Console.WriteLine($"What do you want to do, {name}? \n1 - Choose Pokemon\n2 - See your current Pokemons\n3 - Exit");
+            Console.WriteLine($"What do you want to do, {name}? \n1 - Choose Pokemon\n2 - See your current Pokemons\n3 - Interact with your current Pokemon\n4 - Exit");
         }
 
         public static void ChooseYourPokemon(string name)
@@ -100,8 +100,10 @@ namespace ProjectPokemon
             }
         }
 
-        public static void AllTimeAdoptedPokemon(List<string> ListOfPokemon)
+        public static void AllTimeAdoptedPokemon(List<string> ListOfPokemon, string name)
         {
+
+            //string delimiter = "EMPTY";
 
             if (ListOfPokemon.Count == 0) 
             { 
@@ -109,7 +111,7 @@ namespace ProjectPokemon
             }
             else
             {
-                Console.WriteLine($"The pokemons you have adopted are:");
+                Console.WriteLine($"{name} the pokemons you have adopted are:");
 
                 foreach (string pokemon in ListOfPokemon)
                 {
@@ -117,23 +119,23 @@ namespace ProjectPokemon
                 }
 
             }
-            
+
         }
 
 
         public static void AdoptedSuccess(string PokemonName, out bool LoopExit,out string StopChoosing)
         {
 
-
+            string pokeball = ".......@@@@@@@@@@.......\r\n....@@@@@@@@@@@@@@@@....\r\n...@@@@@@@@@@@@@@@@@@@..\r\n.@@@@@@@@@@@@@@@@@@@@@@.\r\n.@@@@@@@@@@@@@@@@@@@@@@.\r\n@@@@@@@@@@....@@@@@@@@@@\r\n@@@......@....@.......@@\r\n.@@.......@@@@.......@@.\r\n.@@@................@@@.\r\n...@@..............@@@..\r\n....@@@@@......@@@@@....\r\n.......@@@@@@@@@@.......";
             LoopExit = false;
             StopChoosing = null;
 
             string delimitation = "EMPTY";
             //AdoptedPokemon.Add(pokemonlist[choice]);
             Menu.delimiter(delimitation);
-            Console.WriteLine($"{PokemonName} adopted!\nWhat next?\n1 - Checkout more Pokemons" +
-                $"\n2 - Quit");
-
+            Console.WriteLine($"{PokemonName} adopted!\n" + pokeball + "\nWhat next?\n1 - Checkout more Pokemons" +
+                $"\n2 - Return to main menu");
+            //improve this part to handle if the user presses something different from 1 ou 2
             if (Console.ReadLine() == "2")
             {
                 LoopExit = true;
@@ -146,7 +148,7 @@ namespace ProjectPokemon
 
 
 
-        public static async Task<List<string>> ChoosePokemon(string name)
+        public static async Task<List<string>> ChoosePokemon(string name, List<string> CurrentPokemonAdopt)
         {
 
             Dictionary<string, string> pokemonlist = new Dictionary<string, string>();
@@ -211,7 +213,7 @@ namespace ProjectPokemon
                                 //string o = Console.ReadLine();
                                 if(Console.ReadLine() == "1")
                                 {
-                                    AdoptedPokemon.Add(pokemonlist[choice]);
+                                    AdoptedPokemon.Add($"{CurrentPokemonAdopt.Count() + 1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
 
                                     Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                     /*Menu.delimiter(delimitation);
@@ -229,7 +231,7 @@ namespace ProjectPokemon
                             case "2":
                                 /*LoopExit = true;
                                 StopChoosing = "1";*/
-                                AdoptedPokemon.Add(pokemonlist[choice]);
+                                AdoptedPokemon.Add($"{CurrentPokemonAdopt.Count() + 1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
                                 Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                 break;
                             case "3":

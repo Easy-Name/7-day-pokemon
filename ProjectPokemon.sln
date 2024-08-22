@@ -5,6 +5,21 @@ VisualStudioVersion = 17.10.35122.118
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ProjectPokemon", "ProjectPokemon\ProjectPokemon.csproj", "{C0D63BE4-D17B-4046-A011-5F45803CAC64}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Model", "Model", "{612FA417-2CF5-4859-8AF4-6DB7FA728D6A}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectPokemon\PokemonSkills.cs = ProjectPokemon\PokemonSkills.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "View", "View", "{F68BF579-B267-47F0-BCE9-869CD407AFA2}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectPokemon\Menu.cs = ProjectPokemon\Menu.cs
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Controller", "Controller", "{922692C1-40D3-46D4-90FD-3C8B24D02F6F}"
+	ProjectSection(SolutionItems) = preProject
+		ProjectPokemon\Program.cs = ProjectPokemon\Program.cs
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
