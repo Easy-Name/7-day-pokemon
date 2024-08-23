@@ -80,8 +80,6 @@ namespace ProjectPokemon
             Console.WriteLine($"{name}, type the number of the pokemon specie that you want to check");
         }
 
-
-
         public static void ListPokemon(string name, Dictionary<string, string> PokemonList, out string decision)
         {
             Menu.ChooseYourPokemon(name);
@@ -96,18 +94,19 @@ namespace ProjectPokemon
             }
             foreach (KeyValuePair<string, string> kvpokemon in PokemonList)
             {
+                System.Threading.Thread.Sleep(200);
                 Console.WriteLine($"{kvpokemon.Key} - {kvpokemon.Value}");
             }
         }
 
-        public static void AllTimeAdoptedPokemon(List<string> ListOfPokemon, string name)
+        public static void AllTimeAdoptedPokemon(List<string> ListOfPokemon, string name, out bool NoPokeAdopted)
         {
 
             //string delimiter = "EMPTY";
 
             if (ListOfPokemon.Count == 0) 
             { 
-                Console.WriteLine($"You haven't adopted any Pokemon yet!"); 
+                Console.WriteLine($"{name}, you haven't adopted any Pokemon yet! Adopt one or more Pokemon so you can interact with them. Returning to main menu");
             }
             else
             {
@@ -115,13 +114,15 @@ namespace ProjectPokemon
 
                 foreach (string pokemon in ListOfPokemon)
                 {
+                    System.Threading.Thread.Sleep(200);
                     Console.WriteLine($"{pokemon}");
                 }
 
             }
 
-        }
+            if (ListOfPokemon.Count == 0) { NoPokeAdopted = true; } else { NoPokeAdopted= false; }
 
+        }
 
         public static void AdoptedSuccess(string PokemonName, out bool LoopExit,out string StopChoosing)
         {
@@ -135,17 +136,27 @@ namespace ProjectPokemon
             Menu.delimiter(delimitation);
             Console.WriteLine($"{PokemonName} adopted!\n" + pokeball + "\nWhat next?\n1 - Checkout more Pokemons" +
                 $"\n2 - Return to main menu");
-            //improve this part to handle if the user presses something different from 1 ou 2
-            if (Console.ReadLine() == "2")
+            
+            string whatnext = null;
+            bool firstloop = true;
+
+            do
             {
-                LoopExit = true;
-                StopChoosing = "1";
-            }
+
+                if (!firstloop) { Console.WriteLine($"{whatnext} is not a valid choice! Choose a valid option"); } 
+
+                whatnext = Console.ReadLine();
+
+                if (whatnext == "2")
+                {
+                    LoopExit = true;
+                    StopChoosing = "1";
+                }
+
+                firstloop = false;
+            } while (whatnext!="1" && whatnext!="2");
 
         }
-
-
-
 
 
         public static async Task<List<string>> ChoosePokemon(string name, int CurrentPokeQuantity)
@@ -185,7 +196,7 @@ namespace ProjectPokemon
                         Menu.delimiter(delimiter);
                         Console.WriteLine($"{name}, what do you want to do with {pokemonlist[choice]}");
                         Console.WriteLine($"1 - Check Info\n2 - Adopt\n3 - Return to species menu");
-                        //Develop option to exit to main menu
+                        
                         string ChoiceTaken = Console.ReadLine();
 
                         switch (ChoiceTaken)
@@ -204,21 +215,11 @@ namespace ProjectPokemon
                                     AdoptedPokemon.Add($"{CurrentPokeQuantity + AdoptedPokemon.Count+1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
 
                                     Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
-                                    /*Menu.delimiter(delimitation);
-                                    Console.WriteLine($"{pokemonlist[choice]} adopted!\nWhat next?\n1 - Checkout more Pokemons" +
-                                        $"\n2 - Quit");
-
-                                    if(Console.ReadLine() == "2")
-                                    {
-                                        LoopExit = true;
-                                        StopChoosing = "1";
-                                    }
-                                    */
+                                   
                                 }
                                 break;
                             case "2":
-                                /*LoopExit = true;
-                                StopChoosing = "1";*/
+                              
                                 AdoptedPokemon.Add($"{CurrentPokeQuantity + AdoptedPokemon.Count+1} - {pokemonlist[choice]}"); //put the number of the pokemon in the function, not over here
                                 Menu.AdoptedSuccess(pokemonlist[choice], out LoopExit, out StopChoosing);
                                 break;
@@ -265,14 +266,11 @@ namespace ProjectPokemon
             choice = Console.ReadLine();
         }
 
-        public static void bye()
+        public static void Bye()
         {
             Console.WriteLine("See ya!");
 
         }
-
-        
-
 
     }
 }

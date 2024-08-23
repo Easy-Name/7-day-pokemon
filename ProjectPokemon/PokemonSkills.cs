@@ -16,8 +16,6 @@ namespace ProjectPokemon
         public float Height { get; set; }
         public float Weight { get; set; }
 
-        //public Dictionary <string,int> stats;
-
     }
 
     public class Ability
@@ -44,14 +42,6 @@ namespace ProjectPokemon
     {
 
         public int Number;
-
-/*
-        public PokemonMetrics(int number)
-        {
-            Number = number;
-        }
-        */
-
 
         public static int MaxStat = 10;
         public static int MinStat = 0;

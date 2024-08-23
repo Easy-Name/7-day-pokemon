@@ -18,16 +18,6 @@ namespace ProjectPokemon
 
             await Play();
 
-            /*PokemonMetrics metrics = new PokemonMetrics();
-
-            Console.WriteLine(metrics.Healthyness);
-            Console.WriteLine(metrics.Happyness);
-            Console.WriteLine(metrics.Food);
-            Console.WriteLine(metrics.Tiredness);
-            Console.WriteLine(metrics.Healthyness);
-            Console.WriteLine(metrics.Happyness);
-            Console.WriteLine(metrics.Food);
-            Console.WriteLine(metrics.Tiredness);*/
 
             Console.ReadLine();
         }
@@ -48,6 +38,7 @@ namespace ProjectPokemon
             {
                 if (!FirstLoop)
                 {
+                    
                     Menu.ChooseValidOption(name, choice, out choice);
                 }
 
@@ -67,34 +58,57 @@ namespace ProjectPokemon
                         break;
 
                     case "2":
-                        Menu.AllTimeAdoptedPokemon(adoptedPokemon, name);
+                        Menu.AllTimeAdoptedPokemon(adoptedPokemon, name, out bool NoPokeAdopted1);
 
                         break;
                     case "3":
-                        //play with pokemon method
-                        //bool OuterLoop = false;
+
                         int pokemonchoice = 1;
 
+                        bool loop = true;
                         while (pokemonchoice != 0)
                         {
                             Menu.delimiter("EMPTY");
-                            Console.WriteLine($"{name} choose the Pokemon you want to interact with or type \"0\" to return to main menu");
-                            Menu.AllTimeAdoptedPokemon(adoptedPokemon, name);
-                            bool loop = true;
-                            pokemonchoice = Convert.ToInt32(Console.ReadLine()); //improve in case user types something that is not convertable to number or falls out of range (case scenario: when you havent adopted any pokemon yet)
 
-                            if (pokemonchoice == 0) { loop = false; }
+                            if (adoptedPokemon.Count > 0) { Console.WriteLine($"{name} choose the Pokemon you want to interact with or type \"0\" to return to main menu"); }
+
                             
-                            
+                            Menu.AllTimeAdoptedPokemon(adoptedPokemon, name, out bool NoPokeAdopted2);
+
+                            if (NoPokeAdopted2) 
+                            {   
+                                loop = false;
+                                pokemonchoice = 0;
+                            } 
+                            else 
+                            {
+                                string UserInput = Console.ReadLine();
+                                
+                                bool ParseOK = int.TryParse(UserInput, out pokemonchoice); //improve in case user types something that is not convertable to number or falls out of range (case scenario: when you havent adopted any pokemon yet)
+
+                                if (pokemonchoice == 0) { loop = false; }
+
+                                if (adoptedPokemon.Count - pokemonchoice < 0 || pokemonchoice > adoptedPokemon.Count || ParseOK == false)
+                                {
+                                    Console.WriteLine($"{UserInput} is not a valid option");
+                                }
+
+                            }
 
 
                             while (loop)
                             {
                                 //Console.WriteLine($"{name}, checkout {adoptedPokemon[pokemonchoice]}'s condition");
+
+                                System.Threading.Thread.Sleep(500);
                                 Console.WriteLine($"Fullness: {InitializedPokemon[pokemonchoice-1 ].Fullness}/10");
+                                System.Threading.Thread.Sleep(500);
                                 Console.WriteLine($"Happyness: {InitializedPokemon[pokemonchoice-1].Happyness}/10");
+                                System.Threading.Thread.Sleep(500);
                                 Console.WriteLine($"Healthiness: {InitializedPokemon[pokemonchoice - 1].Healthiness}/10");
+                                System.Threading.Thread.Sleep(500);
                                 Console.WriteLine($"Tiredness: {InitializedPokemon[pokemonchoice - 1].Tiredness}/10");
+                                System.Threading.Thread.Sleep(300);
 
                                 Console.WriteLine($"{name}, which action would you like {adoptedPokemon[pokemonchoice-1]} to take?\n1 - Eat\n2 - Sleep\n3 - Play\n4 - Workout\n5 - Return to previous menu ");
 
@@ -120,6 +134,9 @@ namespace ProjectPokemon
                                     case "5":
                                         loop = false;
                                         break;
+                                    default:
+                                        Console.WriteLine($"{decide} is not a valid option");
+                                        break;
                                 }
 
 
@@ -129,7 +146,7 @@ namespace ProjectPokemon
                         break;
 
                     case "4":
-                        Menu.bye();
+                        Menu.Bye();
                         break;
                 }
                 FirstLoop = false;
